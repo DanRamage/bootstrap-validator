@@ -49,7 +49,8 @@
     errors: {
       match: 'Does not match',
       minlength: 'Not long enough'
-    }
+    },
+    input_group: '.form-input-group'
   }
 
   Validator.VALIDATORS = {
@@ -146,10 +147,10 @@
   }
 
   Validator.prototype.showErrors = function ($el) {
+    var input_group = this.options.input_group;
     var method = this.options.html ? 'html' : 'text'
-
     this.defer($el, function () {
-      var $group = $el.closest('.form-group')
+      var $group = $el.closest(input_group)
       var $block = $group.find('.help-block.with-errors')
       var $feedback = $group.find('.form-control-feedback')
       var errors = $el.data('bs.validator.errors')
@@ -172,7 +173,9 @@
   }
 
   Validator.prototype.clearErrors = function ($el) {
-    var $group = $el.closest('.form-group')
+    var input_group = this.options.input_group;
+
+    var $group = $el.closest(input_group)
     var $block = $group.find('.help-block.with-errors')
     var $feedback = $group.find('.form-control-feedback')
 
